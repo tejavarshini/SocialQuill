@@ -18,35 +18,40 @@ A social networking platform with automated content moderation and context-based
 
 ## Project Overview
 
-The project is a social networking platform built using the MERN (MongoDB, Express.js, React.js, Node.js) stack. It incorporates two major features: an automated content moderation system and context-based authentication. These features are accompanied by common functionalities found in social media applications, such as profile creation, post creation and sharing, liking and commenting on posts, and following/unfollowing users.
+SocialQuill
+SocialQuill is a full-stack social networking application built using the MERN stack, featuring AI-powered content moderation and context-based authentication for enhanced platform safety and user data integrity.
 
-### Automated Content Moderation
+This project is a customized and extended version of SocialEcho, built to demonstrate full-stack engineering, system design, and applied AI integration.
 
-The platform's automated content moderation system utilizes various NLP (Natural Language Processing) APIs. These APIs include:
+Features
+User authentication and role-based access (Admin, Moderator, General User)
 
-- Perspective API: Used for filtering spam, profanity, toxicity, harassment etc.
-- TextRazor API: Integrated for content categorization.
-- Hugging Face Interface API: Utilized with BART Large MNLI for content categorization.
+Post creation, commenting, liking, and follow/unfollow functionality
 
-A Flask application has been developed to provide similar functionality as the Hugging Face Interface API's classifier. The Flask app utilizes the BART Large MNLI model. It operates as a zero-shot classification pipeline with a PyTorch framework.
+Automated content moderation using:
 
-The system allows flexibility in choosing different services for API usage or disabling them without affecting overall functionality by using a common interface for interacting with the APIs.
+Perspective API
 
-When a user posts content, it undergoes a thorough filtering process to ensure compliance with the community guidelines. Additionally, users have the ability to report posts that they find inappropriate, which triggers a manual review process.
+TextRazor API
 
-### Context-Based Authentication
+HuggingFace Zero-Shot Classification (via Flask service)
 
-The platform implements context-based authentication to enhance user account security. It takes into consideration user location, IP address, and device information for authentication purposes. Users can conveniently manage their devices directly from the platform. To ensure data privacy, this information is encrypted using the AES algorithm and securely stored in the database.
+Context-based login tracking using IP address, device ID, and location
 
-In case of a suspicious login attempt, users are promptly notified via email and are required to confirm their identity to protect against unauthorized access.
+AES-encrypted device management and suspicious login alerts
 
-### User Roles
+Admin and Moderator dashboards for content and community control
 
-There are three distinct user roles within the system:
+Email notifications for authentication and account activity
 
-1. Admin: The admin role manages the overall system, including moderator management, community management, content moderation, monitoring user activity, and more.
-2. Moderators: Moderators manage communities, manually review reported posts, and perform other moderation-related tasks.
-3. General Users: General users have the ability to make posts, like comments, and perform other actions within the platform.
+Azure Blob Storage integration for secure file handling
+
+Tech Stack
+Frontend: React.js, Redux, Tailwind CSS
+Backend: Node.js, Express.js, MongoDB, Flask
+Authentication: JWT, Passport.js, CryptoJS
+AI/NLP: HuggingFace Transformers, PyTorch
+Deployment: Vercel / Render
 
 
 
