@@ -1,0 +1,65 @@
+services:
+  # Backend Server
+  - type: web
+    name: socialquill-backend
+    env: node
+    buildCommand: cd server && npm install
+    startCommand: cd server && npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 4000
+      - key: CLIENT_URL
+        fromService:
+          type: web
+          name: socialquill-frontend
+          property: host
+      - key: MONGODB_URI
+        sync: false
+      - key: SECRET
+        generateValue: true
+      - key: REFRESH_SECRET
+        generateValue: true
+      - key: CRYPTO_KEY
+        generateValue: true
+      - key: EMAIL
+        sync: false
+      - key: PASSWORD
+        sync: false
+      - key: EMAIL_SERVICE
+        sync: false
+      - key: PERSPECTIVE_API_KEY
+        sync: false
+      - key: TEXTRAZOR_API_KEY
+        sync: false
+      - key: INTERFACE_API_KEY
+        sync: false
+      - key: CLASSIFIER_API_URL
+        fromService:
+          type: web
+          name: socialquill-classifier
+          envVarKey: RENDER_EXTERNAL_URL
+
+  # Flask Classifier Server
+  - type: web
+    name: socialquill-classifier
+    env: python
+    buildCommand: cd classifier_server && pip install -r requirements.txt
+    startCommand: cd classifier_server && python classifier_api.py
+    envVars:
+      - key: PORT
+        value: 5000
+
+  # Frontend Static Site
+  - type: web
+    name: socialquill-frontend
+    env: static
+    buildCommand: cd client && npm install && REACT_APP_API_URL=$BACKEND_URL npm run build
+    staticPublishPath: client/build
+    envVars:
+      - key: REACT_APP_API_URL
+        fromService:
+          type: web
+          name: socialquill-backend
+          envVarKey: RENDER_EXTERNAL_URL
