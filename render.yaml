@@ -3,26 +3,27 @@ services:
   - type: web
     name: socialquill-backend
     env: node
-    buildCommand: cd server && npm install
-    startCommand: cd server && npm start
+    region: oregon
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /
+    rootDir: server
     envVars:
       - key: NODE_ENV
         value: production
       - key: PORT
         value: 4000
       - key: CLIENT_URL
-        fromService:
-          type: web
-          name: socialquill-frontend
-          property: host
+        sync: false
       - key: MONGODB_URI
         sync: false
       - key: SECRET
-        generateValue: true
+        sync: false
       - key: REFRESH_SECRET
-        generateValue: true
+        sync: false
       - key: CRYPTO_KEY
-        generateValue: true
+        sync: false
       - key: EMAIL
         sync: false
       - key: PASSWORD
@@ -35,31 +36,39 @@ services:
         sync: false
       - key: INTERFACE_API_KEY
         sync: false
+      - key: PERSPECTIVE_API_DISCOVERY_URL
+        value: https://commentanalyzer.googleapis.com/$discovery/rest?version=v1alpha1
+      - key: TEXTRAZOR_API_URL
+        value: https://api.textrazor.com/
+      - key: INTERFACE_API_URL
+        value: https://api-inference.huggingface.co/models/facebook/bart-large-mnli
       - key: CLASSIFIER_API_URL
-        fromService:
-          type: web
-          name: socialquill-classifier
-          envVarKey: RENDER_EXTERNAL_URL
+        sync: false
 
   # Flask Classifier Server
   - type: web
     name: socialquill-classifier
     env: python
-    buildCommand: cd classifier_server && pip install -r requirements.txt
-    startCommand: cd classifier_server && python classifier_api.py
+    region: oregon
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: python classifier_api.py
+    rootDir: classifier_server
     envVars:
       - key: PORT
         value: 5000
+      - key: PYTHON_VERSION
+        value: 3.11.0
 
   # Frontend Static Site
   - type: web
     name: socialquill-frontend
-    env: static
-    buildCommand: cd client && npm install && REACT_APP_API_URL=$BACKEND_URL npm run build
-    staticPublishPath: client/build
+    env: node
+    region: oregon
+    plan: free
+    buildCommand: npm install && npm run build
+    staticPublishPath: build
+    rootDir: client
     envVars:
       - key: REACT_APP_API_URL
-        fromService:
-          type: web
-          name: socialquill-backend
-          envVarKey: RENDER_EXTERNAL_URL
+        sync: false
