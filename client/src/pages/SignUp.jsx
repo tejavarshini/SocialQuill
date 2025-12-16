@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import ContextAuthModal from "../components/modals/ContextAuthModal";
 import { RxCross1 } from "react-icons/rx";
 import ButtonLoadingSpinner from "../components/loader/ButtonLoadingSpinner";
-import Logo from "../assets/SocialEcho.png";
+import Logo from "../assets/SocialQuill.png";
 
 const SignUpNew = () => {
   const [loading, setLoading] = useState(false);
@@ -29,7 +29,7 @@ const SignUpNew = () => {
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
 
-    if (e.target.value.includes("mod.socialecho.com")) {
+    if (e.target.value.includes("mod.socialquill.com")) {
       setIsModerator(true);
     } else {
       setIsModerator(false);
@@ -100,8 +100,11 @@ const SignUpNew = () => {
       <div className="container mx-auto flex min-h-screen items-center justify-center px-6">
         <form className="w-full max-w-md" onSubmit={handleSubmit}>
           <div className="mx-auto flex justify-center">
-            <img className="h-7 w-auto sm:h-8" src={Logo} alt="" />
+            <img className="h-20 w-auto sm:h-24" src={Logo} alt="" />
           </div>
+          <p className="mt-3 text-center text-sm text-gray-600 font-medium">
+            More than social. Built on trust.
+          </p>
           {signUpError &&
             Array.isArray(signUpError) &&
             signUpError.map((err, i) => (

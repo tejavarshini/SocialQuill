@@ -6,7 +6,7 @@ import { AiFillGithub } from "react-icons/ai";
 import { RxCross1 } from "react-icons/rx";
 import { MdOutlineAdminPanelSettings } from "react-icons/md";
 import ButtonLoadingSpinner from "../components/loader/ButtonLoadingSpinner";
-import Logo from "../assets/SocialEcho.png";
+import Logo from "../assets/SocialQuill.png";
 
 const SignIn = () => {
   const [loading, setLoading] = useState(false);
@@ -46,8 +46,11 @@ const SignIn = () => {
       <div className="container mx-auto flex min-h-screen flex-col items-center justify-center px-6">
         <form className="w-full max-w-md">
           <div className="mx-auto flex justify-center">
-            <img className="h-7 w-auto sm:h-8" src={Logo} alt="" />
+            <img className="h-20 w-auto sm:h-24" src={Logo} alt="" />
           </div>
+          <p className="mt-3 text-center text-sm text-gray-600 font-medium">
+            More than social. Built on trust.
+          </p>
           {signInError && (
             <div
               className="mt-6 flex items-center justify-between rounded border border-red-400 bg-red-100 px-4 py-3 text-red-700"
@@ -169,24 +172,6 @@ const SignIn = () => {
             </button>
           </div>
         </form>
-        <span className="flex items-center justify-center py-4 text-sm text-gray-600 ">
-          <a
-            href="https://github.com/nz-m/SocialEcho"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center hover:text-blue-500"
-          >
-            <AiFillGithub className="mr-2 h-5 w-5" />
-            <span>GitHub</span>
-          </a>
-          <Link
-            to="/admin"
-            className="ml-8 flex items-center hover:text-blue-500"
-          >
-            <MdOutlineAdminPanelSettings className="mr-2 h-5 w-5" />
-            <span>Admin</span>
-          </Link>
-        </span>
       </div>
     </section>
   );
