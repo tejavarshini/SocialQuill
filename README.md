@@ -1,22 +1,4 @@
-# SocialEcho
 
-A social networking platform with automated content moderation and context-based authentication system.
-
-[Watch Demo](https://youtu.be/Tmncayg7FeU)
-
-![UI-community](https://raw.githubusercontent.com/nz-m/SocialEcho/main/resources/UI-community.png)
-
-## Table of Contents
-
-- [Project Overview](#project-overview)
-- [Features](#features)
-- [Technologies](#technologies)
-- [Schema Diagram](#schema-diagram)
-- [Getting Started](#getting-started)
-- [Usage](#usage)
-- [License](#license)
-
-## Project Overview
 
 SocialQuill
 SocialQuill is a full-stack social networking application built using the MERN stack, featuring AI-powered content moderation and context-based authentication for enhanced platform safety and user data integrity.
@@ -89,9 +71,6 @@ Deployment: Vercel / Render
 - Hugging Face Transformers
 
 
-## Schema Diagram
-
-![Schema Diagram](https://raw.githubusercontent.com/nz-m/SocialEcho/main/resources/Schema-Diagram.png)
 
 
 
